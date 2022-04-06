@@ -1,0 +1,7 @@
+{
+    "envName": "Development",
+    "port": 3000,
+    "db_connectionString": {
+        "db": "mongodb+srv://divyam:Lu0CYCbyKNcMpkph@cluster0.6jibs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    }
+}
