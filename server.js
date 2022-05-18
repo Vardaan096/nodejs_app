@@ -3,7 +3,7 @@ const config = require('./src/config/env/config');
 const connectDB = require('./src/config/database/dbConnection')
 const app = express();
 connectDB();
-const PORT = config.port ? config.port : process.env.PORT
+const PORT = 3000
 
 
 
