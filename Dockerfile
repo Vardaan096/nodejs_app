@@ -3,7 +3,7 @@ FROM node:14
 WORKDIR /app
 
 COPY package.json .
-COPY task-definition.json .
+#COPY task-definition.json .
 RUN npm install 
 COPY . .
 
