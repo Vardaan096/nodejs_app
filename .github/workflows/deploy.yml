@@ -37,7 +37,6 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo ${{ steps.build-image.outputs.image }}
-        echo ${{ steps.build-image.outputs }}
         
  deploying_to_ecs:
      name: deploying to ecs
