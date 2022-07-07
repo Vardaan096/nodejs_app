@@ -26,6 +26,8 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+    - name: List files before
+      run: ls -R  
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
@@ -37,6 +39,8 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo ${{ steps.build-image.outputs.image }}
+    - name: List files after
+      run: ls -R    
         
  deploying_to_ecs:
      name: deploying to ecs
