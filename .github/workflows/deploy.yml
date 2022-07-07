@@ -25,9 +25,7 @@ jobs:
 
     - name: Login to Amazon ECR
       id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-    - name: List files before
-      run: ls -R  
+      uses: aws-actions/amazon-ecr-login@v1 
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
@@ -38,9 +36,7 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo ${{ steps.build-image.outputs.image }}
-    - name: List files after
-      run: ls -R    
+        echo ${{ steps.build-image.outputs.image }}  
         
  deploying_to_ecs:
      name: deploying to ecs
@@ -48,6 +44,13 @@ jobs:
      needs: building_image_and_pushing_to_ecr
      
      steps:
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v1
+       with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: ap-south-1
+        
      - name: Download task definition
        run: |
           aws ecs describe-task-definition --task-definition node_app \
